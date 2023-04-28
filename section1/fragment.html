@@ -15,7 +15,11 @@
   <script type="text/babel">
     const container = document.getElementById('app')
     const root = ReactDOM.createRoot(container)
-    const element = <p>hello react</p>
+    const element =
+    <React.Fragment>
+      <p>hello react</p>
+      <p>hello react</p>
+    </React.Fragment>
     root.render(element)
   </script>
 </body>
