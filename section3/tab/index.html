@@ -17,33 +17,57 @@
     const container = document.getElementById('app')
     const root = ReactDOM.createRoot(container)
 
-    const ComponentTest = () => {
+    const TabMenu = () => {
       const useState = React.useState
       const [active, setActive] = useState(1)
-      const activate = (id) => setActive(active => active = id)
-      const items = []
+      const activate = (id) => {
+        console.log(id)
+        setActive((active) => active = id)
+      }
+      const items = [
+        { id: 1, title: 'サイトの情報' },
+        { id: 2, title: '商品情報' },
+        { id: 3, title: 'お問い合わせ' },
+      ]
       return (
         <React.Fragment>
-          <ul>
-            {items.map((item) => {
-              <li key={item.id}>
-                <a
-                  className={item.id === active ?? 'active'}
-                  href="#"
-                  onClick={() => activate(item.id)}
-                >
-                  {item.title}
-                </a>
-              </li>
-            })}
-          </ul>
+          <section className="tab">
+            <ul className="tab__label">
+              {items.map((item) => (
+                <li key={item.id}>
+                  <a
+                    className={item.id === active && 'active'}
+                    href="#"
+                    onClick={() => activate(item.id)}
+                  >
+                    {item.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            {active === 1 && (
+              <div className="tab__content">
+                サイトの情報。サイトの情報。
+              </div>
+            )}
+            {active === 2 && (
+              <div className="tab__content">
+                商品情報。
+              </div>
+            )}
+            {active === 3 && (
+              <div className="tab__content">
+                お問い合わせ。
+              </div>
+            )}
+          </section>
         </React.Fragment>
       )
     }
 
     root.render(
       <React.Fragment>
-        <ComponentTest />
+        <TabMenu />
       </React.Fragment>
     )
   </script>
