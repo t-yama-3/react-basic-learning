@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <style>
+    ul {
+      list-style: none;
+    }
+    .done {
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script type="text/babel">
+    const container = document.getElementById('app')
+    const root = ReactDOM.createRoot(container)
+
+    const TodoList = () => {
+      const useState = React.useState
+      const [item, setItem] = useState('')
+      const [todos, setTodos] = useState([
+        { item: 'あああ', isDone: false }
+      ])
+      const addItem = () => {
+        if (!item) return
+        const newTodo = {
+          item: item,
+          isDone: false
+        }
+        setTodos([
+          ...todos,
+          newTodo
+        ])
+        setItem('')
+      }
+      const deleteItem = (id) => {
+        const newTodos = todos.filter((todo, index) => index !== id)
+        setTodos(newTodos)
+      }
+      const handleChange = (id, e) => {
+        const newTodos = todos.filter((todo, index) => {
+          if (id === index) {
+            todo.isDone = e.target.checked
+          }
+          return todo
+        })
+        setTodos(newTodos)
+      }
+      return (
+        <React.Fragment>
+          <input type="text" value={item} onChange={(e) => setItem(item => e.target.value)} />
+          <button onClick={addItem}>追加</button>
+          <ul>
+            {todos.map((todo, index) => (
+              <li key={index}>
+                <input type="checkbox" checked={todo.isDone} onChange={(e) => handleChange(index, e)}/>
+                <span className={todo.isDone ? 'done' : undefined}>{todo.item}</span>
+                <button onClick={() => deleteItem(index)}>削除</button>
+              </li>
+            ))}
+          </ul>
+        </React.Fragment>
+      )
+    }
+
+    root.render(
+      <React.Fragment>
+        <TodoList />
+      </React.Fragment>
+    )
+  </script>
+</body>
+</html>
