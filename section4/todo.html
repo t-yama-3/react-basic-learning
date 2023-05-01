@@ -47,7 +47,7 @@
         setTodos(newTodos)
       }
       const handleChange = (id, e) => {
-        const newTodos = todos.filter((todo, index) => {
+        const newTodos = todos.map((todo, index) => {
           if (id === index) {
             todo.isDone = e.target.checked
           }
