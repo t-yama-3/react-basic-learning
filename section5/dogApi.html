@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script type="text/babel">
+    const container = document.getElementById('app')
+    const root = ReactDOM.createRoot(container)
+
+    const DogApi = () => {
+      const useState = React.useState
+      const useEffect = React.useEffect
+
+      const [image, setImage] = useState('')
+
+      const url = 'https://dog.ceo/api/breeds/image/random'
+      const options = { method: 'get' }
+      const getDogImage = async () => {
+        const response = await fetch(url, options)
+        const data = await response.json()
+        setImage(data.message)
+      }
+
+      useEffect(() => {
+        getDogImage()
+      }, [])
+
+      return (
+        <React.Fragment>
+          <button onClick={getDogImage}>画像を取得</button>
+          <img src={image} />
+        </React.Fragment>
+      )
+    }
+
+    root.render(
+      <React.Fragment>
+        <DogApi />
+      </React.Fragment>
+    )
+  </script>
+</body>
+</html>
