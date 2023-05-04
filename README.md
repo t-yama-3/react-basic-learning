@@ -1,5 +1,5 @@
-
 ## CDN 参考
+
 https://ja.legacy.reactjs.org/docs/cdn-links.html
 https://dev-k.hatenablog.com/entry/how-to-use-react-in-cdn-dev-k
 
@@ -18,4 +18,10 @@ const [ステート変数, 更新用の関数] = useState(初期値)
 
 # 使用例
 const [count, setCount] = useState(0)
+```
+
+## create-react-app
+
+```
+npx create-react-app@5.0.1 my-app
 ```
