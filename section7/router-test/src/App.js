@@ -3,15 +3,16 @@
 import Home from './pages/Home';
 import Information from './pages/Information';
 import Contact from './pages/Contact';
-import { Routes, Route, Link, NavLink, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import NotFound from './pages/NotFound';
 import './App.css'
+import Layout from './Layout';
 
 function App() {
   const isAuthenticated = true
   return (
     <>
-      <nav>
+      {/* <nav>
         <ul>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/information">Information</Link></li>
@@ -21,13 +22,15 @@ function App() {
           <li><NavLink to="/contact">Contact</NavLink></li>
         </ul>
       </nav>
-      <a href='information'>aタグです</a>
+      <a href='information'>aタグです</a> */}
       <Routes>
-        <Route index element={<Home />} />
-        <Route path="/information" element={<Information />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/auth" element={isAuthenticated ? <Navigate to="/contact" /> : <Home />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/information" element={<Information />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/auth" element={isAuthenticated ? <Navigate to="/contact" /> : <Home />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
       </Routes>
     </>
   );
