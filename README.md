@@ -74,3 +74,8 @@ BrowserRouter: アプリ内に１つ
 Routes (Switch): 切り替えたい Route を囲む
 Route: コンポーネントを指定する
 ```
+
+```
+useSearchParams: クエリパラメータを取得
+useLocation: ページの情報を取得
+```
