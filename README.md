@@ -68,3 +68,9 @@ npm install --sava styled-components@5.3.6
 ```
 npm install react-router-dom@6.6.0
 ```
+
+```
+BrowserRouter: アプリ内に１つ
+Routes (Switch): 切り替えたい Route を囲む
+Route: コンポーネントを指定する
+```
