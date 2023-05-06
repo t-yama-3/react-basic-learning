@@ -79,3 +79,24 @@ Route: コンポーネントを指定する
 useSearchParams: クエリパラメータを取得
 useLocation: ページの情報を取得
 ```
+
+## MUI
+
+```
+npx create-react-app@5.0.1 book-app
+npm install @mui/material@5.11.1 @emotion/react@11.10.5 @emotion/styled@11.10.5
+npm install @mui/icons-material@5.11.0
+npm install react-router-dom@6.6.0
+```
+
+```
+npm install @mui/material@5.11.1 @emotion/react@11.10.5 @emotion/styled@11.10.5 @mui/icons-material@5.11.0 react-router-dom@6.6.0
+```
+
+### レイアウト
+
+```
+Box: 基本的にこれを使う。html 要素を設定。
+Container: 要素をセンターに寄せる。
+Grid: css の flexbox に該当。横に並べるなど。
+```
