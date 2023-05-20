@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script type="text/babel">
+    const container = document.getElementById('app')
+    const root = ReactDOM.createRoot(container)
+
+    const LocalStrageTest = () => {
+      const useState = React.useState
+      const useEffect = React.useEffect
+      const [books, setBooks] = useState([])
+      const [newBook, setNewBook] = useState('')
+      const STRAGE_KEY = 'books'
+
+      useEffect(() => {
+        const item = localStorage.getItem(STRAGE_KEY)
+        if (item) {
+          try {
+            setBooks(JSON.parse(item))
+          } catch(e) {
+            console.log(e)
+            localStorage.removeItem(STRAGE_KEY)
+          }
+        }
+      }, [])
+
+      useEffect(() => {
+        localStorage.setItem(STRAGE_KEY, JSON.stringify(books))
+      }, [books])
+
+      const addBook = (newBook) => {
+        if (!newBook) return
+        setBooks([...books, newBook])
+        setNewBook('')
+      }
+
+      const removeBook = (id) => {
+        const newList = books.filter((book, index) => index !== id)
+        setBooks(newList)
+      }
+
+      return (
+        <React.Fragment>
+          <ul>
+            {books.map((book, index) => (
+              <li key={index}>
+                {book}
+                <button onClick={() => removeBook(index)}>削除</button>
+              </li>
+            ))}
+          </ul>
+          <input type="text" value={newBook} onChange={(e) => setNewBook(e.target.value)} />
+          <button onClick={() => addBook(newBook)} >追加</button>
+        </React.Fragment>
+      )
+    }
+
+    root.render(
+      <React.Fragment>
+        <LocalStrageTest />
+      </React.Fragment>
+    )
+  </script>
+</body>
+</html>
