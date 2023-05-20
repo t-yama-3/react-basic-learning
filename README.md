@@ -104,3 +104,23 @@ Grid: css の flexbox に該当。横に並べるなど。
 https://www.googleapis.com/books/v1/volumes?q=%E5%A4%8F%E7%9B%AE%E6%BC%B1%E7%9F%B3
 https://labo.kon-ruri.co.jp/google-books-apis/
 https://developers.google.com/books/docs/v1/using?hl=ja
+
+## ローカルストレージの使用
+
+```
+# 取得
+localStorage.getItem(key)
+# 保存
+localStorage.setItem(key)
+# 削除
+localStorage.removeItem(key)
+```
+
+文字列しか格納できない
+
+```
+# 文字列（JSON形式）をオブジェクトに変換
+JSON.parse()
+# オブジェクトを文字列（JSON形式）に変換
+JSON.stringify()
+```
