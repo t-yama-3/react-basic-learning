@@ -100,3 +100,23 @@ Box: 基本的にこれを使う。html 要素を設定。
 Container: 要素をセンターに寄せる。
 Grid: css の flexbox に該当。横に並べるなど。
 ```
+
+## ローカルストレージの使用
+
+```
+# 取得
+localStorage.getItem(key)
+# 保存
+localStorage.setItem(key)
+# 削除
+localStorage.removeItem(key)
+```
+
+文字列しか格納できない
+
+```
+# 文字列（JSON形式）をオブジェクトに変換
+JSON.parse()
+# オブジェクトを文字列（JSON形式）に変換
+JSON.stringify()
+```

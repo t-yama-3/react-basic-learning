@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script type="text/babel">
+    const container = document.getElementById('app')
+    const root = ReactDOM.createRoot(container)
+
+    const ApiTest = () => {
+      const useRef = React.useRef
+      const useState = React.useState
+      const keyword = useRef('')
+      const [searchResult, setSearchResult] = useState([])
+      const search = async (keyword) => {
+        const baseUrl = 'https://www.googleapis.com/books/v1/volumes?'
+        const params = { q: `intitle:${keyword.current.value}`, maxResults: 40 }
+        const queryParams = new URLSearchParams(params) // JSでクエリパラメータ生成
+        console.log(baseUrl + queryParams)
+
+        const data = await fetch(baseUrl + queryParams)
+        const response = await data.json()
+        console.log(response.items)
+
+        const newList = response.items.map((item) => {
+          const title = item.volumeInfo.title
+          const image = item.volumeInfo.imageLinks
+          const description = item.volumeInfo.description
+          return {
+            title: title ? title : '',
+            image: image ? image.thumbnail : '',
+            description: description ? description.slice(0, 40) : '',
+          }
+        })
+        setSearchResult(newList)
+      }
+      return (
+        <React.Fragment>
+          <input type='text' ref={keyword} />
+          <button onClick={() => search(keyword)}>検索する</button>
+          <ul>
+            {searchResult.map((book) => (
+              <li key={book.title}>{book.title}</li>
+            ))}
+            </ul>
+        </React.Fragment>
+      )
+    }
+
+    root.render(
+      <React.Fragment>
+        <ApiTest />
+      </React.Fragment>
+    )
+  </script>
+</body>
+</html>
